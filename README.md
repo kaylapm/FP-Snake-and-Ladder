@@ -1,4 +1,12 @@
 # FP-Snake-and-Ladder
+Class    : C
+* Group    : 01
+* Members  :
+* 1. 5026231158 - Kayla Putri Maharani
+* 2. 5026231173 - Naura Salsabila
+* 3. 5026231139 - Amandea Chandiki Larasati
+* 4. 5026231226 - Vivi Alvianita
+-----------------------------------------------------------------------------------------------------------------------------------------
 Terdapat beberapa fitur tambahan yaitu :
 1. Jumlah dadu menjadi 2
 2. Ketika player mendapatkan dua dadu benilai 6, maka player tersebut mendapat giliran bermain lagi
