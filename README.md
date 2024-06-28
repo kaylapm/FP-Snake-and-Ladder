@@ -1,7 +1,7 @@
 # FP-Snake-and-Ladder
 Class    : C
-* Group    : 01
-* Members  :
+Group    : 01
+Members  :
 * 1. 5026231158 - Kayla Putri Maharani
 * 2. 5026231173 - Naura Salsabila
 * 3. 5026231139 - Amandea Chandiki Larasati
