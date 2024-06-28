@@ -13,25 +13,18 @@
  * 4. 5026231226 - Vivi Alvianita
  * ------------------------------------------------------
  */
+public class Surprise {
+    private int position;
 
-public class Snake{
-    private int fromPosition;
-    private int toPosition;
+    public Surprise(int position) {
+        this.position = position;
+    }
 
-    public Snake(int from, int to) {
-        this.fromPosition = from;
-        this.toPosition = to;
+    public int getPosition() {
+        return position;
     }
-    public void setFromPosition(int fromPosition){
-        this.fromPosition = fromPosition;
-    }
-    public void setToPosition(int toPosition){
-        this.toPosition = toPosition;
-    }
-    public int getFromPosition(){
-        return fromPosition;
-    }
-    public int getToPosition(){
-        return toPosition;
+
+    public boolean isWinningPosition(int playerPosition) {
+        return playerPosition == position;
     }
 }

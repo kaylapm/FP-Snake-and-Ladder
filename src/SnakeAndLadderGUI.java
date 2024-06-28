@@ -5,139 +5,125 @@
  * Group Capstone Project: Snake and Ladder Game
  * -----------------------------------------------------
  * Class    : C
- * Group    : XX
+ * Group    : 01
  * Members  :
- * 1. Student ID - Full Name
- * 2. Student ID - Full Name
- * 3. Student ID - Full Name
+ * 1. 5026231158 - Kayla Putri Maharani
+ * 2. 5026231173 - Naura Salsabila
+ * 3. 5026231139 - Amandea Chandiki Larasati
+ * 4. 5026231226 - Vivi Alvianita
  * ------------------------------------------------------
  */
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class SnakeAndLadderGUI extends JFrame {
 
-    JLabel currentPlayer1Label;
-    JLabel currentPlayer2Label;
-    JLabel firstScoreLabel;
-    JLabel secondScoreLabel;
+    JTextField[] playerFields;
+    JLabel[] playerLabels;
+    JLabel[] scoreLabels;
     JLabel currentPlayerInfoLabel;
     JLabel playerTurnLabel;
     JLabel firstDiceLabel;
     JLabel secondDiceLabel;
+    JButton startButton;
     CustomSnakeAndLadder game;
 
     public SnakeAndLadderGUI() {
         setTitle("Snake and Ladder");
-        setSize(640, 400);
+        setSize(850, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         setLocationRelativeTo(null);
 
-        JPanel mainPanel = new JPanel(null); 
+        JPanel mainPanel = new JPanel(null);
 
         JLabel titleLabel = new JLabel("Snake and Ladder");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
-        titleLabel.setBounds(207, 26, 300, 40);
+        titleLabel.setBounds(307, 26, 300, 40);
         mainPanel.add(titleLabel);
 
-        JTextField firstPlayerField = new JTextField();
-        firstPlayerField.setBounds(100, 108, 150, 26);
-        mainPanel.add(firstPlayerField);
+        playerFields = new JTextField[4];
+        playerLabels = new JLabel[4];
+        scoreLabels = new JLabel[4];
 
-        JLabel player1Label = new JLabel("Player 1");
-        player1Label.setFont(new Font("Arial", Font.BOLD, 14));
-        player1Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player1Label.setBounds(155, 85, 80, 16);
-        mainPanel.add(player1Label);
+        for (int i = 0; i < 4; i++) {
+            playerFields[i] = new JTextField();
+            playerFields[i].setBounds(250, 108 + i * 40, 150, 26);
+            mainPanel.add(playerFields[i]);
 
-        JLabel player2Label = new JLabel("Player 2");
-        player2Label.setFont(new Font("Arial", Font.BOLD, 14));
-        player2Label.setHorizontalAlignment(SwingConstants.CENTER);
-        player2Label.setBounds(439, 85, 80, 16);
-        mainPanel.add(player2Label);
+            playerLabels[i] = new JLabel("Player " + (i + 1));
+            playerLabels[i].setFont(new Font("Arial", Font.BOLD, 14));
+            playerLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
+            playerLabels[i].setBounds(460, 108 + i * 40, 80, 26);
+            mainPanel.add(playerLabels[i]);
 
-        JTextField secondPlayerField = new JTextField();
-        secondPlayerField.setBounds(386, 108, 150, 26);
-        mainPanel.add(secondPlayerField);
+            scoreLabels[i] = new JLabel("0");
+            scoreLabels[i].setFont(new Font("Arial", Font.PLAIN, 20));
+            scoreLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
+            scoreLabels[i].setBounds(540, 108 + i * 40, 80, 26);
+            mainPanel.add(scoreLabels[i]);
+        }
 
-        JButton startButton = new JButton("Start Game");
-        startButton.setBounds(98, 156, 445, 26);
+        startButton = new JButton("Start Game");
+        startButton.setBounds(200, 300, 445, 26);
 
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String player1Name = firstPlayerField.getText();
-                String player2Name = secondPlayerField.getText();
+                resetPlayerLabels();
 
-                currentPlayer1Label.setText(player1Name);
-                currentPlayer2Label.setText(player2Name);
+                ArrayList<String> playerNames = new ArrayList<>();
+                for (int i = 0; i < 4; i++) {
+                    if (!playerFields[i].getText().trim().isEmpty()) {
+                        playerNames.add(playerFields[i].getText().trim());
+                    }
+                }
 
-                firstPlayerField.setText("");
-                secondPlayerField.setText("");
+                if (playerNames.size() < 2) {
+                    JOptionPane.showMessageDialog(null, "Please enter at least two players.");
+                    return;
+                }
+
+                for (int i = 0; i < playerNames.size(); i++) {
+                    playerLabels[i].setText(playerNames.get(i));
+                    playerLabels[i].setForeground(Color.BLUE);
+                    scoreLabels[i].setForeground(Color.BLUE);
+                }
 
                 game = new CustomSnakeAndLadder(100, SnakeAndLadderGUI.this);
-                game.startGame(player1Name, player2Name);
+                game.startGame(playerNames);
             }
         });
         mainPanel.add(startButton);
 
-        currentPlayer1Label = new JLabel("Player 1");
-        currentPlayer1Label.setFont(new Font("Arial", Font.BOLD, 14));
-        currentPlayer1Label.setHorizontalAlignment(SwingConstants.CENTER);
-        currentPlayer1Label.setBounds(54, 229, 80, 16);
-        mainPanel.add(currentPlayer1Label);
-
-        currentPlayer2Label = new JLabel("Player 2");
-        currentPlayer2Label.setFont(new Font("Arial", Font.BOLD, 14));
-        currentPlayer2Label.setHorizontalAlignment(SwingConstants.CENTER);
-        currentPlayer2Label.setBounds(153, 229, 80, 16);
-        mainPanel.add(currentPlayer2Label);
-
-        JLabel currentPositionLabel = new JLabel("Current Position");
-        currentPositionLabel.setFont(new Font("Arial", Font.BOLD, 14));
-        currentPositionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        currentPositionLabel.setBounds(54, 200, 150, 16);
-        mainPanel.add(currentPositionLabel);
-
-        firstScoreLabel = new JLabel("0");
-        firstScoreLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        firstScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        firstScoreLabel.setBounds(64, 251, 80, 30);
-        mainPanel.add(firstScoreLabel);
-
-        secondScoreLabel = new JLabel("0");
-        secondScoreLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        secondScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        secondScoreLabel.setBounds(163, 251, 80, 30);
-        mainPanel.add(secondScoreLabel);
-
         currentPlayerInfoLabel = new JLabel("-");
         currentPlayerInfoLabel.setHorizontalAlignment(SwingConstants.LEFT);
         currentPlayerInfoLabel.setVerticalAlignment(SwingConstants.TOP);
-        currentPlayerInfoLabel.setBounds(54, 288, 150, 83);
+        currentPlayerInfoLabel.setBounds(150, 400, 150, 83);
         mainPanel.add(currentPlayerInfoLabel);
 
         playerTurnLabel = new JLabel("Player Turn");
         playerTurnLabel.setFont(new Font("Arial", Font.BOLD, 14));
         playerTurnLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        playerTurnLabel.setBounds(391, 200, 150, 16);
+        playerTurnLabel.setBounds(500, 350, 150, 16);
         mainPanel.add(playerTurnLabel);
 
         firstDiceLabel = new JLabel();
-        firstDiceLabel.setBounds(330, 225, 112, 107);
+        firstDiceLabel.setBounds(450, 380, 112, 107);
         mainPanel.add(firstDiceLabel);
 
         secondDiceLabel = new JLabel();
-        secondDiceLabel.setBounds(487, 225, 112, 107);
+        secondDiceLabel.setBounds(600, 380, 112, 107);
         mainPanel.add(secondDiceLabel);
 
         JButton rollButton = new JButton("Roll Dice");
-        rollButton.setBounds(371, 340, 190, 26);
+        rollButton.setBounds(500, 520, 190, 26);
 
         rollButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                game.rollDice();
+                if (game != null) {
+                    game.rollDice();
+                }
             }
         });
         mainPanel.add(rollButton);
@@ -147,9 +133,9 @@ public class SnakeAndLadderGUI extends JFrame {
 
     private ImageIcon resizeImageIcon(String imagePath, int width, int height) {
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(imagePath));
-        Image image = imageIcon.getImage(); 
+        Image image = imageIcon.getImage();
         Image newImg = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
-        return new ImageIcon(newImg);  
+        return new ImageIcon(newImg);
     }
 
     public void updateTurnLabel(String text) {
@@ -166,11 +152,31 @@ public class SnakeAndLadderGUI extends JFrame {
     }
 
     public void updateScore(int player, int position) {
-        if (player == 1) {
-            firstScoreLabel.setText(String.valueOf(position));
-        } else if (player == 2) {
-            secondScoreLabel.setText(String.valueOf(position));
+        if (player >= 1 && player <= 4) {
+            scoreLabels[player - 1].setText(String.valueOf(position));
         }
     }
 
+    public void disableStartButton() {
+        startButton.setEnabled(false);
+    }
+
+    public void enableStartButton() {
+        startButton.setEnabled(true);
+    }
+
+    public void emptyPlayerNameFields() {
+        for (int i = 0; i < 4; i++) {
+            playerFields[i].setText("");
+        }
+    }
+
+    private void resetPlayerLabels() {
+        for (int i = 0; i < 4; i++) {
+            playerLabels[i].setText("Player " + (i + 1));
+            playerLabels[i].setForeground(Color.BLACK);
+            scoreLabels[i].setForeground(Color.BLACK);
+            scoreLabels[i].setText("0");
+        }
+    }
 }

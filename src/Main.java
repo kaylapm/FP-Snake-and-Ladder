@@ -5,13 +5,15 @@
  * Group Capstone Project: Snake and Ladder Game
  * -----------------------------------------------------
  * Class    : C
- * Group    : XX
+ * Group    : 01
  * Members  :
- * 1. Student ID - Full Name
- * 2. Student ID - Full Name
- * 3. Student ID - Full Name
+ * 1. 5026231158 - Kayla Putri Maharani
+ * 2. 5026231173 - Naura Salsabila
+ * 3. 5026231139 - Amandea Chandiki Larasati
+ * 4. 5026231226 - Vivi Alvianita
  * ------------------------------------------------------
  */
+
 import javax.swing.SwingUtilities;
 public class Main {
 

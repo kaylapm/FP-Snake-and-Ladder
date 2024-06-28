@@ -13,29 +13,18 @@
  * 4. 5026231226 - Vivi Alvianita
  * ------------------------------------------------------
  */
+public class Bomb {
+    private int position;
+    private final int penalty = 20; // Fixed penalty of 20 positions
 
-public class Ladder {
-    private int fromPosition;
-    private int toPosition;
+    public Bomb(int position) {
+            this.position = position;
+        }
+    public int getPosition() {
+            return position;
+        }
 
-    public Ladder(int x, int y){
-        this.fromPosition = x;
-        this.toPosition = y;
+    public int getPenalty() {
+            return penalty;
+        }
     }
-
-    public void setFromPosition(int x){
-        this.fromPosition = x;
-    }
-
-    public void setToPosition(int y){
-        this.toPosition = y;
-    }
-
-    public int getFromPosition(){
-        return fromPosition;
-    }
-
-    public int getToPosition(){
-        return toPosition;
-    }
-}
